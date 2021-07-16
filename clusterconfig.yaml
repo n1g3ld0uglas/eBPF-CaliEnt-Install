@@ -1,15 +1,15 @@
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 metadata:
-  name: my-calico-cluster   
-  region: us-west-2
+  name: nigel-eks-cluster2   
+  region: eu-west-1
   version: '1.18'
 nodeGroups:
-  - name: ng-my-calico-cluster
+  - name: ng-nigel-eks-cluster2
     instanceType: t3.medium
     minSize: 0
-    maxSize: 4
-    desiredCapacity: 4
+    maxSize: 3
+    desiredCapacity: 3
     amiFamily: Bottlerocket
     iam:
       attachPolicyARNs:
