@@ -48,3 +48,18 @@ eksctl create cluster --config-file clusterconfig.yaml
 <img width="1616" alt="Screenshot 2021-07-16 at 10 55 46" src="https://user-images.githubusercontent.com/82048393/125929908-3f30dde8-c722-4152-a039-55439421d0f2.png">
 
 
+For an EKS cluster, it’s important to use the domain name of the EKS-provided load balancer that is in front of the API server. 
+This can be found by running the following command:
+```
+kubectl cluster-info
+```
+
+<img width="1066" alt="Screenshot 2021-07-16 at 11 23 42" src="https://user-images.githubusercontent.com/82048393/125933659-f0cc134b-6f7b-4080-9c4c-36be61cc77c5.png">
+
+
+which should give output similar to the following:
+```
+Kubernetes master is running at https://9F907E01D0053CB4A993C940313F63D3.gr7.eu-west-1.eks.amazonaws.com
+```
+
+
