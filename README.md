@@ -1,4 +1,4 @@
-# eBPF-CaliEnt-Install
+# eBPF-CaliEnt-Install-EKS
 The easiest way to start an EKS cluster that meets eBPF mode’s requirements is to use Amazon’s Bottlerocket OS, instead of the default. Bottlerocket is a container-optimised OS with an emphasis on security; it has a version of the kernel which is compatible with eBPF mode.
 
 Download and extract the latest release of eksctl with the following command
