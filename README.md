@@ -62,7 +62,15 @@ which should give output similar to the following:
 Kubernetes master is running at https://9F907E01D0053CB4A993C940313F63D3.gr7.eu-west-1.eks.amazonaws.com
 ```
 
-Create the following config map in the tigera-operator namespace using the host and port determined above:
+
+
+Create the following config map in the tigera-operator namespace 
+```
+kubectl create namespace tigera-operator
+```
+
+
+Use the host and port determined from the previous cluster-info command:
 ```
 kubectl apply -f https://raw.githubusercontent.com/n1g3ld0uglas/eBPF-CaliEnt-Install/main/configmap.yaml
 ```
