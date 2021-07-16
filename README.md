@@ -75,3 +75,44 @@ Use the host and port determined from the previous cluster-info command:
 kubectl apply -f https://raw.githubusercontent.com/n1g3ld0uglas/eBPF-CaliEnt-Install/main/configmap.yaml
 ```
 
+In the following example for an AWS cloud provider integration, the StorageClass tells Calico Enterprise to use EBS disks for log storage.
+```
+kubectl apply -f https://raw.githubusercontent.com/n1g3ld0uglas/eBPF-CaliEnt-Install/main/storageclass.yaml
+```
+
+Install the Tigera operator and custom resource definitions.
+```
+kubectl create -f https://docs.tigera.io/manifests/tigera-operator.yaml
+```
+
+<img width="1203" alt="Screenshot 2021-07-16 at 11 35 34" src="https://user-images.githubusercontent.com/82048393/125935120-bb0a69fa-31ff-446d-b694-597317fe7d3e.png">
+
+Install the Prometheus operator and related custom resource definitions. 
+The Prometheus operator will be used to deploy Prometheus server and Alertmanager to monitor Calico Enterprise metrics.
+
+```
+kubectl create -f https://docs.tigera.io/manifests/tigera-prometheus-operator.yaml
+```
+
+Install your pull secret.
+```
+kubectl create secret generic tigera-pull-secret \
+    --type=kubernetes.io/dockerconfigjson -n tigera-operator \
+    --from-file=.dockerconfigjson=config.json
+```
+
+When the main install guide tells you to apply the custom-resources.yaml, typically you will run kubectl create with the URL of the file directly. 
+In this case you should instead download the file, so that you can edit it:
+
+```
+curl -o custom-resources.yaml https://docs.tigera.io/manifests/eks/custom-resources.yaml
+```
+
+<img width="1042" alt="Screenshot 2021-07-16 at 11 44 26" src="https://user-images.githubusercontent.com/82048393/125936123-480f20cb-d890-453f-b3c3-3dba5c83b66c.png">
+
+
+* Edit the file in your editor of choice and find the Installation resource, which should be at the top of the file. 
+* To enable eBPF mode, we need to add a new calicoNetwork section inside the spec of the Installation resource.
+* You would also need to include the linuxDataplane field. 
+* For EKS only, you should also add the flexVolumePath setting as shown below.
+
