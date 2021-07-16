@@ -1,0 +1,8 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: kubernetes-services-endpoint
+  namespace: tigera-operator
+data:
+  KUBERNETES_SERVICE_HOST: "https://9F907E01D0053CB4A993C940313F63D3.gr7.eu-west-1.eks.amazonaws.com"
+  KUBERNETES_SERVICE_PORT: "443"
