@@ -116,3 +116,15 @@ curl -o custom-resources.yaml https://docs.tigera.io/manifests/eks/custom-resour
 * You would also need to include the linuxDataplane field. 
 * For EKS only, you should also add the flexVolumePath setting as shown below.
 
+<img width="1042" alt="Screenshot 2021-07-16 at 11 51 54" src="https://user-images.githubusercontent.com/82048393/125937010-2246fab7-222d-4a96-afe4-e408b61f3956.png">
+
+
+```
+kubectl create -f custom-resources.yaml
+```
+
+You can monitor progress of the installation with the following command:
+
+```
+watch kubectl get tigerastatus
+```
