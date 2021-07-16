@@ -35,12 +35,16 @@ After you install kubectl , you can verify its version with the following comman
 kubectl version --short --client
 ```
 
-
-
-
+Download the cluster configuration file
+```
+wget https://raw.githubusercontent.com/n1g3ld0uglas/eBPF-CaliEnt-Install/main/clusterconfig.yaml
+```
 
 When using eksctl it is important to use the config-file approach to creating a cluster in order to set the additional IAM permissions that Bottlerocket requires.
 ```
-eksctl create cluster --config-file -f https://raw.githubusercontent.com/n1g3ld0uglas/eBPF-CaliEnt-Install/main/clusterconfig.yaml
+eksctl create cluster --config-file clusterconfig.yaml
 ```
+
+<img width="1616" alt="Screenshot 2021-07-16 at 10 55 46" src="https://user-images.githubusercontent.com/82048393/125929908-3f30dde8-c722-4152-a039-55439421d0f2.png">
+
 
