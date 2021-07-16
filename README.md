@@ -128,3 +128,12 @@ You can monitor progress of the installation with the following command:
 ```
 watch kubectl get tigerastatus
 ```
+
+<img width="746" alt="Screenshot 2021-07-16 at 15 10 34" src="https://user-images.githubusercontent.com/82048393/125961357-de5377ce-6d9c-4a6c-9568-ab834b7b6fff.png">
+
+
+In EKS, you can disable kube-proxy, reversibly, by adding a node selector that doesn’t match and nodes to kube-proxy’s DaemonSet, for example:
+```
+kubectl patch ds -n kube-system kube-proxy -p '{"spec":{"template":{"spec":{"nodeSelector":{"non-calico": "true"}}}}}'
+```
+
