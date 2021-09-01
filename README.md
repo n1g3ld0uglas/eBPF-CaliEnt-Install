@@ -137,3 +137,23 @@ In EKS, you can disable kube-proxy, reversibly, by adding a node selector that d
 kubectl patch ds -n kube-system kube-proxy -p '{"spec":{"template":{"spec":{"nodeSelector":{"non-calico": "true"}}}}}'
 ```
 
+# Alternatively, hook-up cluster to Calico Cloud
+
+First, create an Amazon EKS cluster without any nodes.
+```
+eksctl create cluster --name my-calico-cluster --without-nodegroup
+```
+Since this cluster will use Calico for networking, you must delete the aws-node daemon set to disable AWS VPC networking for pods.
+```
+kubectl delete daemonset -n kube-system aws-node
+```
+Now that you have a cluster configured, you can install Calico.
+```
+kubectl apply -f https://docs.projectcalico.org/archive/v3.20/manifests/calico-vxlan.yaml
+```
+Finally, add nodes to the cluster.
+```
+eksctl create nodegroup --cluster my-calico-cluster --node-type t3.medium --node-ami auto --max-pods-per-node 100
+```
+
+Install process is outlined here --> https://docs.projectcalico.org/archive/v3.20/getting-started/kubernetes/managed-public-cloud/eks
